@@ -1,16 +1,14 @@
 
-#An array of random letters
-
 my_dice = [
-["Q", "Q", "Q", "Q", "Q", "Q"], #dice 0
-["E", "L", "R", "T", "T", "Y"], #dice 1 etc...
+["Q", "Q", "Q", "Q", "Q", "Q"],
+["E", "L", "R", "T", "T", "Y"], 
 ["A", "A", "E", "E", "G", "N"],
 ["E", "L", "R", "T", "T", "Y"],
 ["A", "A", "E", "E", "G", "N"],
 ["E", "L", "R", "T", "T", "Y"],
 ["A", "A", "B", "E", "G", "N"],
 ["S", "L", "R", "T", "N", "Y"],
-["A", "A", "E", "E", "Qu", "N"],
+["A", "A", "E", "E", "Q", "N"],
 ["E", "L", "R", "T", "T", "Y"],
 ["S", "M", "E", "E", "G", "N"],
 ["E", "L", "R", "T", "T", "Y"],
@@ -20,38 +18,36 @@ my_dice = [
 ["E", "O", "R", "T", "T", "Y"]
 ]
 
-board = ['-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-']
+board = Array.new(16, "-")
 
 length = my_dice.length
 dice_length = my_dice[0].length
 
 board.each_with_index do |thing, index|
-	board[index] = my_dice[index][rand(dice_length)] # in this area, we need to access each dcue one after another
+board[index] = my_dice[index][rand(dice_length)]
 end
 
+#here is where we print the boggle bpard
 newboard = board.each_slice(4).to_a
 newboard.each do |x|
-	p x
+	p x.join(" ")
 end
 
 
-# we need to ask the user for a word, and then check it against 'board'
+# asking the user for a word, converting to an array, pulling out the unique characters
 puts "Give us a word!"
 ourword = gets.chomp
-
-
-word = ourword.upcase.scan /\w/
-
+word = ourword.upcase.scan /\w/ #this separates the string into an array of characters
 board = board.uniq
 
-# p board
+# here we declare our wincount and winstatus (out of scope of next section)
 wincount = 0
 win = false
 
-board.each do |letter|#this takes each item from our bord array, and passes it as 'cube'
-    i = 0#sets the counter at 0
+# here we check each letter on the board, and compare ot to our original board (before it was split)
+board.each do |letter|
+	i = 0
 	until i == word.length 
-	# p letter#until i = the word lenngth (which is 3)
 		if letter == word[i]
 		    wincount += 1
 			    if wincount == word.length
@@ -62,12 +58,14 @@ board.each do |letter|#this takes each item from our bord array, and passes it a
 		i += 1
 	end
 end
+
+#Checks if you are a winner!
 if win == true
 	p 'YOU ARE A WINNER'
 else
 	p "YOU LOSE"
 end
- # p "Better luck next time..."
+
 
 
 
