@@ -2,7 +2,7 @@
 #An array of random letters
 
 my_dice = [
-["Qu", "Qu", "Qu", "Qu", "Qu", "Qu"], #dice 0
+["Q", "Q", "Q", "Q", "Q", "Q"], #dice 0
 ["E", "L", "R", "T", "T", "Y"], #dice 1 etc...
 ["A", "A", "E", "E", "G", "N"],
 ["E", "L", "R", "T", "T", "Y"],
@@ -34,5 +34,40 @@ newboard.each do |x|
 	p x
 end
 
-# rand(length)
+
+# we need to ask the user for a word, and then check it against 'board'
+puts "Give us a word!"
+ourword = gets.chomp
+
+
+word = ourword.upcase.scan /\w/
+
+board = board.uniq
+
+# p board
+wincount = 0
+win = false
+
+board.each do |letter|#this takes each item from our bord array, and passes it as 'cube'
+    i = 0#sets the counter at 0
+	until i == word.length 
+	# p letter#until i = the word lenngth (which is 3)
+		if letter == word[i]
+		    wincount += 1
+			    if wincount == word.length
+			    win = true
+			else
+			end
+		end
+		i += 1
+	end
+end
+if win == true
+	p 'YOU ARE A WINNER'
+else
+	p "YOU LOSE"
+end
+ # p "Better luck next time..."
+
+
 
